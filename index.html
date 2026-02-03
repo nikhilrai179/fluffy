@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Be My Valentine ❤️</title>
+
 <style>
     body {
-       <audio autoplay loop>
-  <source src="https://files.catbox.moe/hbmkbx.mp3" type="audio/mpeg">
-</audio>
         font-family: "Poppins", sans-serif;
         background: linear-gradient(to bottom right, #ffb6c1, #ffdde1);
         overflow-x: hidden;
@@ -57,7 +55,7 @@
         position: absolute;
     }
 
-    /* Heart container (hidden initially) */
+    /* Heart container */
     #photoHeart {
         margin-top: 40px;
         display: none;
@@ -69,11 +67,11 @@
         to   { opacity: 1; transform: scale(1); }
     }
 
-    /* Glowing animated heart shape */
+    /* Heart shape with image */
     .heart-shape {
         width: 300px;
         height: 270px;
-        background: url('myphoto.heic') center/cover no-repeat;
+        background: url('girl.heic') center/cover no-repeat;
         position: relative;
         margin: auto;
         clip-path: path("M 150 30 C 120 -20, 30 -20, 30 60 C 30 120, 150 240, 150 240 C 150 240, 270 120, 270 60 C 270 -20, 180 -20, 150 30 Z");
@@ -85,7 +83,7 @@
         100% { box-shadow: 0 0 45px rgba(255, 0, 80, 0.8); }
     }
 
-    /* Floating small hearts */
+    /* Floating little hearts */
     .heart {
         position: absolute;
         color: #ff1f60;
@@ -99,7 +97,7 @@
         100% { transform: translateY(-600px); opacity: 0; }
     }
 
-    /* Rose petals */
+    /* Rose petals falling */
     .petal {
         position: fixed;
         top: -10px;
@@ -115,11 +113,12 @@
     }
 </style>
 </head>
+
 <body>
 
-<!-- Background Love Song -->
-<audio autoplay loop>
-  <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Loyalty_Freak_Music/LO-FI_Hip_Hop/Loyalty_Freak_Music_-_02_-_I_Dont_Really_Care.mp3" type="audio/mpeg">
+<!-- Tum Mile audio (plays only when YES is clicked - works on iPhone) -->
+<audio id="loveSong" loop>
+  <source src="https://files.catbox.moe/hbmkbx.mp3" type="audio/mpeg">
 </audio>
 
 <h1>Will You Be My Valentine? ❤️</h1>
@@ -128,7 +127,7 @@
 <button id="yes" class="btn">Yes my love ❤️</button>
 <button id="no" class="btn">No 😜</button>
 
-<!-- Heart photo appears after YES -->
+<!-- Heart photo appears when YES is clicked -->
 <div id="photoHeart">
       <div class="heart-shape"></div>
 </div>
@@ -136,8 +135,9 @@
 <script>
     const noBtn = document.getElementById("no");
     const photoHeart = document.getElementById("photoHeart");
+    const audio = document.getElementById("loveSong");
 
-    // Move NO button away
+    // Move NO button
     noBtn.addEventListener("mouseover", () => {
         const x = Math.random() * (window.innerWidth - 200);
         const y = Math.random() * (window.innerHeight - 200);
@@ -145,13 +145,14 @@
         noBtn.style.top = `${y}px`;
     });
 
-    // Show glowing heart-photo when YES is clicked
+    // YES button = show heart + play Tum Mile
     document.getElementById("yes").addEventListener("click", () => {
+        audio.play();  // Music plays here (iPhone supported)
         photoHeart.style.display = "block";
         window.scrollTo({ top: 600, behavior: "smooth" });
     });
 
-    // Floating little hearts
+    // Floating hearts
     function createHeart() {
         const heart = document.createElement("div");
         heart.classList.add("heart");
@@ -163,7 +164,7 @@
     }
     setInterval(createHeart, 500);
 
-    // Falling rose petals
+    // Falling petals
     function createPetal() {
         const petal = document.createElement("div");
         petal.classList.add("petal");
